@@ -1,6 +1,7 @@
 import React from 'react';
+import { AppRoute } from '../../const';
 
-const Filter = () => {
+const Filter = ({ mode }) => {
 	return (
 		<section className='main__filter filter'>
 			<input
@@ -53,9 +54,9 @@ const Filter = () => {
 			>
 			<button
 				name='control'
-				className='btn-add'
+				className={`btn-add ${mode === AppRoute.FORM && 'hidden'}`}
 			>Создать</button>
-		</section>
+		</section >
 	)
 };
 
