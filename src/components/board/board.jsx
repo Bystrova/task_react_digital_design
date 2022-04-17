@@ -1,16 +1,16 @@
 import React from 'react';
 import Card from '../card/card';
 import LoadMore from '../load-more/load-more';
-import Event from '../event/event';
 import Sorting from '../sorting/sorting';
+import Event from '../../components/event/event';
 import { AppRoute } from '../../const';
 
-const Board = ({ mode }) => {
-	if (mode === AppRoute.MAIN || mode === AppRoute.ARCHIVE) {
+const Board = ({ location, id }) => {
+	if (location === AppRoute.MAIN || location === AppRoute.ARCHIVE) {
 		return (
 			<section className='board'>
-				<Sorting mode={mode} />
-				<div className={`board__events ${mode === AppRoute.ARCHIVE && 'board__events--archive'}`}>
+				<Sorting location={location} />
+				<div className={`board__events ${location === AppRoute.ARCHIVE && 'board__events--archive'}`}>
 					<Card />
 				</div>
 				<LoadMore />
@@ -19,7 +19,7 @@ const Board = ({ mode }) => {
 	}
 	return (
 		<section className='board'>
-			<Event isNewEvent={true} />
+			<Event id={id} />
 		</section>
 	)
 }

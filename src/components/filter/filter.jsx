@@ -1,7 +1,9 @@
 import React from 'react';
 import { AppRoute } from '../../const';
+import { Link } from 'react-router-dom';
 
-const Filter = ({ mode }) => {
+
+const Filter = ({ location }) => {
 	return (
 		<section className='main__filter filter'>
 			<input
@@ -52,10 +54,10 @@ const Filter = ({ mode }) => {
 			<label htmlFor='filter__favorite' className='filter__label'
 			>Избранное <span className='filter__favorite-count count'>1</span></label
 			>
-			<button
+			<Link to={AppRoute.ADD}
 				name='control'
-				className={`btn-add ${mode === AppRoute.FORM && 'hidden'}`}
-			>Создать</button>
+				className={`btn-add ${location === AppRoute.ADD && 'hidden'}`}
+			>Создать</Link>
 		</section >
 	)
 };

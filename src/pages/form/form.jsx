@@ -2,15 +2,21 @@ import React from 'react';
 import Header from '../../components/header/header';
 import Filter from '../../components/filter/filter';
 import Board from '../../components/board/board';
-import { AppRoute } from '../../const';
 
-const Form = () => {
+const Form = (props) => {
+	const getLocation = () => {
+		const longLocation = window.location.pathname;
+		const secondSlash = longLocation.lastIndexOf('/');
+		return secondSlash === 0 ? longLocation : longLocation.slice(0, secondSlash);
+	}
+	const { id } = props.match.params;
+
 	return (
 		<>
-			<Header mode={AppRoute.FORM} />
+			<Header location={getLocation()} />
 			<section className='main__wrapper'>
-				<Filter mode={AppRoute.FORM} />
-				<Board mode={AppRoute.FORM} />
+				<Filter location={getLocation()} />
+				<Board location={getLocation()} id={id} />
 			</section>
 		</>
 	)
