@@ -1,14 +1,14 @@
 import React from 'react';
 
-const Event = ({ isNewEvent }) => {
+const Event = ({ id }) => {
 	let formHeading;
 	let buttonText;
-	if (isNewEvent) {
-		formHeading = 'Добавление события';
-		buttonText = 'Добавить';
-	} else {
+	if (id) {
 		formHeading = 'Редактирование события';
 		buttonText = 'Сохранить';
+	} else {
+		formHeading = 'Добавление события';
+		buttonText = 'Добавить';
 	}
 	return (
 		<form className='board__form'>

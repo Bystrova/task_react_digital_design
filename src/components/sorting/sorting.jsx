@@ -1,8 +1,8 @@
 import React from 'react';
 import { AppRoute } from '../../const';
 
-const Sorting = ({ mode }) => {
-	if (mode === AppRoute.MAIN) {
+const Sorting = ({ location }) => {
+	if (location === AppRoute.MAIN) {
 		return (
 			<div className='board__filter-list'>
 				<span className='board__filter--title'>Сортировка:</span>
