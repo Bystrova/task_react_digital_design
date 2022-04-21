@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../../components/header/header';
 import Filter from '../../components/filter/filter';
-import Board from '../../components/board/board';
+import Event from '../../components/event/event';
 
 const Form = (props) => {
 	const getLocation = () => {
@@ -16,7 +16,9 @@ const Form = (props) => {
 			<Header location={getLocation()} />
 			<section className='main__wrapper'>
 				<Filter location={getLocation()} />
-				<Board location={getLocation()} id={id} />
+				<section className='board'>
+					<Event id={id} />
+				</section>
 			</section>
 		</>
 	)
