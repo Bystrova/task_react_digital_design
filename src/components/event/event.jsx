@@ -1,6 +1,7 @@
 import React from 'react';
+import moment from 'moment';
 
-const Event = ({ id }) => {
+const Event = ({ id, theme, comment, date }) => {
 	let formHeading;
 	let buttonText;
 	if (id) {
@@ -10,6 +11,8 @@ const Event = ({ id }) => {
 		formHeading = 'Добавление события';
 		buttonText = 'Добавить';
 	}
+	const formatDate = moment(date).utc().format('YYYY-MM-DDTHH:mm');
+
 	return (
 		<form className='board__form'>
 			<h2 className='board__title'>{formHeading}</h2>
@@ -20,6 +23,7 @@ const Event = ({ id }) => {
 					className='board__input board__input--theme'
 					name='theme'
 					required
+					defaultValue={id && theme}
 				></textarea>
 			</fieldset>
 			<fieldset className='board__field board__field--comment'>
@@ -29,6 +33,7 @@ const Event = ({ id }) => {
 					className='board__input board__input--comment'
 					name='comment'
 					required
+					defaultValue={id && comment}
 				></textarea>
 			</fieldset>
 			<fieldset className='board__field board__field--date'>
@@ -37,6 +42,7 @@ const Event = ({ id }) => {
 					type='datetime-local'
 					className='board__input board__input--date'
 					name='date'
+					defaultValue={id && formatDate}
 				/>
 			</fieldset>
 			<div className='btns'>

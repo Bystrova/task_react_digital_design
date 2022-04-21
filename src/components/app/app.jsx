@@ -7,8 +7,9 @@ import Error from '../../pages/error/error';
 import { AppRoute } from '../../const';
 
 const App = ({ events }) => {
+	// const lalala = 'lalala';
 	return (
-		<BrowserRouter>
+		<BrowserRouter >
 			<Switch>
 				<Route path={AppRoute.MAIN} exact>
 					<Main events={events} />
@@ -16,7 +17,8 @@ const App = ({ events }) => {
 				<Route path={AppRoute.ARCHIVE} exact>
 					<Archive events={events} />
 				</Route>
-				<Route path={AppRoute.EVENT} exact component={Form} />
+				{/* <Route path={AppRoute.EVENT} exact component={Form} /> */}
+				<Route path={AppRoute.EVENT} exact render={(props) => <Form events={events} id={props.match.params.id} />} />
 				<Route>
 					<Error />
 				</Route>
