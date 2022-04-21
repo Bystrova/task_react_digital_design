@@ -4,13 +4,13 @@ import Filter from '../../components/filter/filter';
 import Board from '../../components/board/board';
 
 
-const Main = () => {
+const Main = ({ events }) => {
 	return (
 		<>
 			<Header location={window.location.pathname} />
 			<section className='main__wrapper'>
 				<Filter />
-				<Board location={window.location.pathname} />
+				<Board location={window.location.pathname} events={events} />
 			</section>
 		</>
 	)

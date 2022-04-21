@@ -4,12 +4,12 @@ import LoadMore from '../load-more/load-more';
 import Sorting from '../sorting/sorting';
 import { AppRoute } from '../../const';
 
-const Board = ({ location, id }) => {
+const Board = ({ location, events }) => {
 	return (
 		<section className='board'>
 			{location === AppRoute.MAIN && <Sorting />}
 			<div className={`board__events ${location === AppRoute.ARCHIVE && 'board__events--archive'}`}>
-				<Card />
+				{events.map(event => <Card {...event} key={event._id} />)}
 			</div>
 			<LoadMore />
 		</section>
