@@ -5,20 +5,21 @@ import Archive from '../../pages/archive/archive';
 import Form from '../../pages/form/form';
 import Error from '../../pages/error/error';
 import { AppRoute } from '../../const';
+import { observer } from 'mobx-react-lite';
 
-const App = ({ events }) => {
-	// const lalala = 'lalala';
+const App = observer(() => {
+
 	return (
 		<BrowserRouter >
 			<Switch>
 				<Route path={AppRoute.MAIN} exact>
-					<Main events={events} />
+					<Main />
 				</Route>
 				<Route path={AppRoute.ARCHIVE} exact>
-					<Archive events={events} />
+					<Archive />
 				</Route>
 				{/* <Route path={AppRoute.EVENT} exact component={Form} /> */}
-				<Route path={AppRoute.EVENT} exact render={(props) => <Form events={events} id={props.match.params.id} />} />
+				{/* <Route path={AppRoute.EVENT} exact render={(props) => <Form events={events} id={props.match.params.id} />} /> */}
 				<Route>
 					<Error />
 				</Route>
@@ -26,5 +27,6 @@ const App = ({ events }) => {
 		</BrowserRouter >
 	)
 }
+)
 
 export default App;
