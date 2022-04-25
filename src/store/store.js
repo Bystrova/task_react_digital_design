@@ -64,8 +64,8 @@ class EventsStore {
 		yield this.fetch();
 	}
 
-	*clearArchive(id) {
-		yield clearArchive(id);
+	*clearArchive() {
+		yield clearArchive();
 		yield this.fetch();
 	}
 }

@@ -15,11 +15,10 @@ const ClearArchive = () => {
 	// 	return obj;
 	// })
 
-	// console.log(dataToClear);
-
 	const handleClear = (evt) => {
 		evt.preventDefault();
 		events.clearArchive(archiveData);
+		// archiveData.forEach(item => events.deleteEvent(item._id));
 	}
 
 	return (
