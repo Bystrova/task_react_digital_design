@@ -38,12 +38,10 @@ class EventsStore {
 
 	get archiveData() {
 		return this.data.map(event => new EventStore(event)).filter(event => event.archive);
-		// return this.data.filter(event => event.archive);
 	}
 
 	get notArchiveData() {
 		return this.data.map(event => new EventStore(event)).filter(event => !event.archive);
-		// return this.data.filter(event => !event.archive);
 	}
 
 	*fetch() {
@@ -66,8 +64,8 @@ class EventsStore {
 		yield this.fetch();
 	}
 
-	*clearArchive(data) {
-		yield clearArchive(data);
+	*clearArchive(id) {
+		yield clearArchive(id);
 		yield this.fetch();
 	}
 }

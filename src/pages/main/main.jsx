@@ -11,10 +11,10 @@ const Main = observer(() => {
 
 	return (
 		<>
-			<Header location={window.location.pathname} />
+			<Header />
 			<section className='main__wrapper'>
 				<Filter />
-				<Board location={window.location.pathname} events={notArchiveData} />
+				<Board events={notArchiveData} />
 			</section>
 		</>
 	)

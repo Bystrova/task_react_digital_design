@@ -8,9 +8,9 @@ const Archive = observer(() => {
 	const { archiveData } = events;
 	return (
 		<>
-			<Header location={window.location.pathname} />
+			<Header />
 			<section className='main__wrapper'>
-				<Board location={window.location.pathname} events={archiveData} />
+				<Board events={archiveData} />
 			</section>
 		</>
 	)

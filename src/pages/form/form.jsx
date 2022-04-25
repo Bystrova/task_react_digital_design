@@ -4,26 +4,20 @@ import Filter from '../../components/filter/filter';
 import Event from '../../components/event/event';
 import { events } from '../../store/store';
 import { observer } from 'mobx-react-lite';
+import { useParams } from 'react-router-dom';
 
-const Form = observer((props) => {
-
-	const getLocation = () => {
-		const longLocation = window.location.pathname;
-		const secondSlash = longLocation.lastIndexOf('/');
-		return secondSlash === 0 ? longLocation : longLocation.slice(0, secondSlash);
-	}
-
-	const { id } = props.match.params;
+const Form = observer(() => {
+	const { id } = useParams();
 	const { data } = events;
 	const event = data.find(element => element._id === id);
 
 	return (
 		<>
-			<Header location={getLocation()} />
+			<Header />
 			<section className='main__wrapper'>
-				<Filter location={getLocation()} />
+				<Filter />
 				<section className='board'>
-					<Event id={id} {...event} />
+					<Event {...event} />
 				</section>
 			</section>
 		</>

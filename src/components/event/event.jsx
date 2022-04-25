@@ -3,9 +3,11 @@ import moment from 'moment';
 import { useState } from 'react';
 import { events } from '../../store/store';
 import { observer } from 'mobx-react-lite';
+import { useParams } from 'react-router-dom';
 
 
-const Event = observer(({ id, _id, theme, comment, date, favorite, archive }) => {
+const Event = observer(({ _id, theme, comment, date, favorite, archive }) => {
+	const { id } = useParams();
 	let formHeading;
 	let buttonText;
 	if (id) {

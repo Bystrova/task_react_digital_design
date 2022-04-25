@@ -4,8 +4,10 @@ import LoadMore from '../load-more/load-more';
 import ClearArchive from '../clear-archive/clear-archive';
 import Sorting from '../sorting/sorting';
 import { AppRoute } from '../../const';
+import { useLocation } from 'react-router-dom';
 
-const Board = ({ location, events }) => {
+const Board = ({ events }) => {
+	const location = useLocation().pathname;
 	return (
 		<section className='board'>
 			{location === AppRoute.MAIN && <Sorting />}

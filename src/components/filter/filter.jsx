@@ -1,9 +1,12 @@
 import React from 'react';
 import { AppRoute } from '../../const';
 import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-
-const Filter = ({ location }) => {
+const Filter = () => {
+	const location = useLocation().pathname;
+	const { id } = useParams();
 	return (
 		<section className='main__filter filter'>
 			<input
@@ -56,7 +59,7 @@ const Filter = ({ location }) => {
 			>
 			<Link to={AppRoute.ADD}
 				name='control'
-				className={`btn-add ${location === AppRoute.ADD && 'hidden'}`}
+				className={`btn-add ${(location === AppRoute.ADD || location === `${AppRoute.ADD}/${id}`) && 'hidden'}`}
 			>Создать</Link>
 		</section >
 	)
