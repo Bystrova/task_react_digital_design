@@ -1,5 +1,5 @@
 import {computed, makeAutoObservable, onBecomeObserved} from 'mobx';
-import { getEvents, addEvent, editEvent, deleteEvent } from '../api';
+import { getEvents, addEvent, editEvent, deleteEvent, clearArchive } from '../api';
 
 class EventStore {
 	_id;
@@ -38,10 +38,12 @@ class EventsStore {
 
 	get archiveData() {
 		return this.data.map(event => new EventStore(event)).filter(event => event.archive);
+		// return this.data.filter(event => event.archive);
 	}
 
 	get notArchiveData() {
 		return this.data.map(event => new EventStore(event)).filter(event => !event.archive);
+		// return this.data.filter(event => !event.archive);
 	}
 
 	*fetch() {
@@ -61,6 +63,11 @@ class EventsStore {
 
 	*deleteEvent(id) {
 		yield deleteEvent(id);
+		yield this.fetch();
+	}
+
+	*clearArchive(data) {
+		yield clearArchive(data);
 		yield this.fetch();
 	}
 }

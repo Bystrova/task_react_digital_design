@@ -4,14 +4,11 @@ import './card.css';
 import moment from 'moment';
 import 'moment/locale/ru';
 import { events } from '../../store/store';
+import { AppRoute } from '../../const';
 
 
 const Card = ({ _id, theme, comment, date, favorite, archive }) => {
 	const formatDate = moment(date).format('DD MMMM');
-
-	const handleEdit = () => {
-
-	}
 
 	const handleArchive = (evt) => {
 		evt.preventDefault();
@@ -48,10 +45,9 @@ const Card = ({ _id, theme, comment, date, favorite, archive }) => {
 				<div className='card__inner'>
 					<div className='card__control'>
 						<Link
-							to={`/event/${_id}`}
+							to={`${AppRoute.ADD}/${_id}`}
 							type='button'
 							className='card__btn card__btn--edit'
-							onClick={handleEdit}
 						>
 							Редактировать
 						</Link>

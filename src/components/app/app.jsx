@@ -19,7 +19,7 @@ const App = observer(() => {
 					<Archive />
 				</Route>
 				{/* <Route path={AppRoute.EVENT} exact component={Form} /> */}
-				{/* <Route path={AppRoute.EVENT} exact render={(props) => <Form events={events} id={props.match.params.id} />} /> */}
+				<Route path={AppRoute.EVENT} exact render={(props) => <Form {...props} />} />
 				<Route>
 					<Error />
 				</Route>

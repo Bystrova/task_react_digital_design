@@ -1,0 +1,23 @@
+.clear-archive {
+	width: calc(100% - 86px);
+	padding: 12px 0;
+	display: flex;
+	justify-content: center;
+	background-color: var(--accent-btn-color);
+	border: none;
+	color: var(--font-color);
+	font-weight: 600;
+	cursor: pointer;
+	margin: 0 35px 0;
+	margin-top: auto;
+	margin-bottom: 10px;
+	outline: none;
+}
+
+.clear-archive:hover {
+	background-color: #c00707;
+}
+
+.clear-archive:active {
+	background-color: #da0808;
+}
