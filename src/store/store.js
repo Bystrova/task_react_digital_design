@@ -1,5 +1,6 @@
 import {computed, makeAutoObservable, onBecomeObserved} from 'mobx';
 import { getEvents, addEvent, editEvent, deleteEvent, clearArchive } from '../api';
+import moment from 'moment';
 
 class EventStore {
 	_id;
@@ -25,6 +26,7 @@ class EventStore {
 
 class EventsStore {
 	data = [];
+	filtredData = [];
 
 	constructor() {
 		makeAutoObservable(this, {}, {
@@ -44,9 +46,34 @@ class EventsStore {
 		return this.data.map(event => new EventStore(event)).filter(event => !event.archive);
 	}
 
+	get pastData() {
+		return this.data
+		.map(event => new EventStore(event))
+		.filter(event => moment(event.date).isBefore(moment(), 'day') && !event.archive)
+	}
+
+	get todayData() {
+	return this.data
+	.map(event => new EventStore(event))
+	.filter(event => moment(event.date).isSame(moment(), 'day') && !event.archive)
+}
+
+	get futureData() {
+	return this.data
+	.map(event => new EventStore(event))
+	.filter(event => moment(event.date).isAfter(moment(), 'day') && !event.archive)
+}
+
+	get favoriteData() {
+	return this.data
+	.map(event => new EventStore(event))
+	.filter(event => event.favorite && !event.notArchiveData)
+	}
+
 	*fetch() {
 		const response = yield getEvents();
 		this.data = response.map(event => new EventStore(event));
+		this.filtredData = response.map(event => new EventStore(event)).filter(event => !event.archive);
 	}
 
 	*addEvent(data) {
