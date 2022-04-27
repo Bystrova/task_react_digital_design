@@ -1,5 +1,6 @@
 import {computed, makeAutoObservable, onBecomeObserved} from 'mobx';
 import { getEvents, addEvent, editEvent, deleteEvent, clearArchive } from '../api';
+import moment from 'moment';
 
 class EventStore {
 	_id;
@@ -25,6 +26,11 @@ class EventStore {
 
 class EventsStore {
 	data = [];
+	filtredData = [];
+	sortedData = [];
+	sortingType = 'defaultSortedData';
+	filtredType = 'notArchiveData';
+	
 
 	constructor() {
 		makeAutoObservable(this, {}, {
@@ -37,16 +43,62 @@ class EventsStore {
 	}
 
 	get archiveData() {
-		return this.data.map(event => new EventStore(event)).filter(event => event.archive);
+		return this.data
+			.map(event => new EventStore(event))
+			.filter(event => event.archive);
 	}
 
 	get notArchiveData() {
-		return this.data.map(event => new EventStore(event)).filter(event => !event.archive);
+		return this.data
+			.map(event => new EventStore(event))
+			.filter(event => !event.archive);
+	}
+
+	get pastData() {
+		return this.data
+			.map(event => new EventStore(event))
+			.filter(event => moment(event.date).isBefore(moment(), 'day') && !event.archive)
+	}
+
+	get todayData() {
+		return this.data
+			.map(event => new EventStore(event))
+			.filter(event => moment(event.date).isSame(moment(), 'day') && !event.archive)
+}
+
+	get futureData() {
+		return this.data
+			.map(event => new EventStore(event))
+			.filter(event => moment(event.date).isAfter(moment(), 'day') && !event.archive)
+}
+
+	get favoriteData() {
+		return this.data
+			.map(event => new EventStore(event))
+			.filter(event => event.favorite && !event.archive)
+	}
+
+	get ascendingSortedData() {
+		return this.filtredData
+			.slice()
+			.sort((a, b) => a.date > b.date ? 1 : -1)
+	}
+
+	get descendingSortedData() {
+		return this.filtredData
+			.slice()
+			.sort((a, b) => a.date < b.date ? 1 : -1)
+	}
+
+	get defaultSortedData() {
+		return this.filtredData
 	}
 
 	*fetch() {
 		const response = yield getEvents();
 		this.data = response.map(event => new EventStore(event));
+		this.filtredData = this[this.filtredType];
+		this.sortedData = this[this.sortingType];
 	}
 
 	*addEvent(data) {

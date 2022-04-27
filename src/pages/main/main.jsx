@@ -7,14 +7,14 @@ import { observer } from 'mobx-react-lite';
 
 
 const Main = observer(() => {
-	const { notArchiveData } = events;
+	const { sortedData } = events;
 
 	return (
 		<>
 			<Header />
 			<section className='main__wrapper'>
 				<Filter />
-				<Board events={notArchiveData} />
+				<Board events={sortedData} />
 			</section>
 		</>
 	)

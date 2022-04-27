@@ -7,17 +7,16 @@ import { events } from '../../store/store';
 import { AppRoute } from '../../const';
 
 
-const Card = ({ _id, theme, comment, date, favorite, archive }) => {
+const Card = ({ event }) => {
+	const { _id, theme, comment, date, favorite, archive } = event;
+
 	const formatDate = moment(date).format('DD MMMM');
 
 	const handleArchive = (evt) => {
 		evt.preventDefault();
 		events.editEvent({
+			...event,
 			id: _id,
-			theme,
-			comment,
-			date,
-			favorite,
 			archive: !archive
 		});
 	}
@@ -25,12 +24,9 @@ const Card = ({ _id, theme, comment, date, favorite, archive }) => {
 	const handleFavorite = (evt) => {
 		evt.preventDefault();
 		events.editEvent({
+			...event,
 			id: _id,
-			theme,
-			comment,
-			date,
 			favorite: !favorite,
-			archive
 		});
 	}
 
