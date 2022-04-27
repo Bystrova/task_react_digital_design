@@ -20,8 +20,11 @@ const Filter = observer(() => {
 	} = events
 
 	const handleFiltred = action((evt) => {
-		events.filtredData = events[evt.target.value]
+		events.filtredData = events[evt.target.value];
+		events.sortedData = events[events.sortingType];
+		events.filtredType = evt.target.value;
 	});
+
 	return (
 		<section className='main__filter filter'>
 			<input
@@ -30,9 +33,9 @@ const Filter = observer(() => {
 				className='filter__input visually-hidden'
 				name='filter'
 				value={'notArchiveData'}
-				defaultChecked
 				onClick={handleFiltred}
 				disabled={!notArchiveData.length}
+				defaultChecked={events.filtredType === 'notArchiveData'}
 			/>
 			<label htmlFor='filter__all' className='filter__label'>
 				Все <span className='filter__all-count count'>{notArchiveData.length}</span></label
@@ -45,6 +48,7 @@ const Filter = observer(() => {
 				value={'pastData'}
 				onClick={handleFiltred}
 				disabled={!pastData.length}
+				defaultChecked={events.filtredType === 'pastData'}
 			/>
 			<label htmlFor='filter__overdue' className='filter__label'
 			>Прошедшие <span className='filter__overdue-count count'>{pastData.length}</span></label
@@ -57,6 +61,7 @@ const Filter = observer(() => {
 				value={'todayData'}
 				onClick={handleFiltred}
 				disabled={!todayData.length}
+				defaultChecked={events.filtredType === 'todayData'}
 			/>
 			<label htmlFor='filter__today' className='filter__label'
 			>Сегодня <span className='filter__today-count count'>{todayData.length}</span></label
@@ -69,6 +74,7 @@ const Filter = observer(() => {
 				value={'futureData'}
 				onClick={handleFiltred}
 				disabled={!futureData.length}
+				defaultChecked={events.filtredType === 'futureData'}
 			/>
 			<label htmlFor='filter__future' className='filter__label'
 			>Будущие <span className='filter__future-count count'>{futureData.length}</span></label
@@ -81,6 +87,7 @@ const Filter = observer(() => {
 				value={'favoriteData'}
 				onClick={handleFiltred}
 				disabled={!favoriteData.length}
+				defaultChecked={events.filtredType === 'favoriteData'}
 			/>
 			<label htmlFor='filter__favorite' className='filter__label'
 			>Избранное <span className='filter__favorite-count count'>{favoriteData.length}</span></label

@@ -4,9 +4,10 @@ import { useState } from 'react';
 import { events } from '../../store/store';
 import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
-
+import { useHistory } from 'react-router-dom';
 
 const Event = observer(({ _id, theme, comment, date, favorite, archive }) => {
+	const pageHistory = useHistory();
 	const { id } = useParams();
 	let formHeading;
 	let buttonText;
@@ -22,7 +23,7 @@ const Event = observer(({ _id, theme, comment, date, favorite, archive }) => {
 	const [form, setForm] = useState({
 		theme: theme,
 		comment: comment,
-		date: new Date()
+		date: formatDate
 	});
 
 	const handleFieldChange = (evt) => {
@@ -44,7 +45,8 @@ const Event = observer(({ _id, theme, comment, date, favorite, archive }) => {
 		} else {
 			events.addEvent(form);
 		}
-		window.history.back();
+		// window.history.back();
+		pageHistory.goBack();
 	}
 
 	return (

@@ -9,10 +9,10 @@ import { useState } from 'react';
 
 const Board = ({ events }) => {
 	const location = useLocation().pathname;
-
-	const [step, setStep] = useState(1);
+	let cardQuantity = 40;
+	const [step, setStep] = useState(cardQuantity);
 	const handleLoadMore = () => {
-		events.length >= step ? setStep(step + 1) : setStep(events.length);
+		events.length >= step ? setStep(step + cardQuantity) : setStep(events.length);
 	}
 
 	return (
